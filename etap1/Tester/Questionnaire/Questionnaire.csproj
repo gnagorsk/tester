@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Questions.edmx.sql" />
-    <Content Include="TestManagement.svc" />
+    <Content Include="TestService.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -67,14 +67,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITestManagement.cs" />
+    <Compile Include="ITestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Questions.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TestManagement.svc.cs">
-      <DependentUpon>TestManagement.svc</DependentUpon>
+    <Compile Include="TestService.svc.cs">
+      <DependentUpon>TestService.svc</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

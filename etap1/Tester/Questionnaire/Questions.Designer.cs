@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("Questions", "QuestionCategory", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Questionnaire.Question), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Questionnaire.Category))]
 [assembly: EdmRelationshipAttribute("Questions", "QuestionAnswer", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Questionnaire.Question), "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Questionnaire.Answer))]
 [assembly: EdmRelationshipAttribute("Questions", "CorrectQuestionAnswer", "Question", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Questionnaire.Question), "Answer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Questionnaire.Answer))]
+[assembly: EdmRelationshipAttribute("Questions", "Subcategory", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Questionnaire.Category), "Category1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Questionnaire.Category), true)]
 
 #endregion
 
@@ -317,6 +318,30 @@ namespace Questionnaire
         private global::System.String _text;
         partial void OntextChanging(global::System.String value);
         partial void OntextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Category_id
+        {
+            get
+            {
+                return _Category_id;
+            }
+            set
+            {
+                OnCategory_idChanging(value);
+                ReportPropertyChanging("Category_id");
+                _Category_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Category_id");
+                OnCategory_idChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Category_id;
+        partial void OnCategory_idChanging(Nullable<global::System.Int32> value);
+        partial void OnCategory_idChanged();
 
         #endregion
 
@@ -344,6 +369,28 @@ namespace Questionnaire
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Questions", "Subcategory", "Category1")]
+        public EntityCollection<Category> Subcategories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Category>("Questions.Subcategory", "Category1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Category>("Questions.Subcategory", "Category1", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -363,13 +410,11 @@ namespace Questionnaire
         /// Create a new Question object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="title">Initial value of the title property.</param>
         /// <param name="text">Initial value of the text property.</param>
-        public static Question CreateQuestion(global::System.Int32 id, global::System.String title, global::System.String text)
+        public static Question CreateQuestion(global::System.Int32 id, global::System.String text)
         {
             Question question = new Question();
             question.id = id;
-            question.title = title;
             question.text = text;
             return question;
         }
@@ -404,30 +449,6 @@ namespace Questionnaire
         private global::System.Int32 _id;
         partial void OnidChanging(global::System.Int32 value);
         partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String title
-        {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                OntitleChanging(value);
-                ReportPropertyChanging("title");
-                _title = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("title");
-                OntitleChanged();
-            }
-        }
-        private global::System.String _title;
-        partial void OntitleChanging(global::System.String value);
-        partial void OntitleChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

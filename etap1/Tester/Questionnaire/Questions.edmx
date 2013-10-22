@@ -26,13 +26,16 @@
       <End Role="Question" EntitySet="QuestionSet" />
       <End Role="Answer" EntitySet="AnswerSet" />
     </AssociationSet>
+    <AssociationSet Name="Subcategory" Association="Questions.Store.Subcategory">
+      <End Role="Category" EntitySet="CategorySet" />
+      <End Role="Category1" EntitySet="CategorySet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="QuestionSet">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="text" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Category_id" Type="int" Nullable="false" />
     <Property Name="CorrectAnswer_id" Type="int" Nullable="false" />
@@ -43,6 +46,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Category_id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="AnswerSet">
     <Key>
@@ -80,6 +84,18 @@
       </Principal>
       <Dependent Role="Question">
         <PropertyRef Name="CorrectAnswer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Subcategory">
+    <End Role="Category" Type="Questions.Store.CategorySet" Multiplicity="0..1" />
+    <End Role="Category1" Type="Questions.Store.CategorySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="Category_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -127,13 +143,16 @@
             <End Role="Question" EntitySet="QuestionSet" />
             <End Role="Answer" EntitySet="AnswerSet" />
           </AssociationSet>
+          <AssociationSet Name="Subcategory" Association="Questions.Subcategory">
+            <End Role="Category" EntitySet="CategorySet" />
+            <End Role="Category1" EntitySet="CategorySet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="title" Nullable="false" />
           <Property Type="String" Name="text" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Questions.QuestionCategory" FromRole="Question" ToRole="Category" />
           <NavigationProperty Name="Answers" Relationship="Questions.QuestionAnswer" FromRole="Question" ToRole="Answer" />
@@ -146,6 +165,8 @@
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="text" Nullable="false" />
           <NavigationProperty Name="Question" Relationship="Questions.QuestionCategory" FromRole="Category" ToRole="Question" />
+          <NavigationProperty Name="Subcategories" Relationship="Questions.Subcategory" FromRole="Category" ToRole="Category1" />
+          <Property Type="Int32" Name="Category_id" Nullable="true" />
         </EntityType>
         <EntityType Name="Answer">
           <Key>
@@ -166,6 +187,18 @@
           <End Type="Questions.Question" Role="Question" Multiplicity="*" />
           <End Type="Questions.Answer" Role="Answer" Multiplicity="1" />
         </Association>
+        <Association Name="Subcategory">
+          <End Type="Questions.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Questions.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="Category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -176,7 +209,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Questions.Question)">
         <MappingFragment StoreEntitySet="QuestionSet">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="text" ColumnName="text" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -186,6 +218,7 @@
         <MappingFragment StoreEntitySet="CategorySet">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="Category_id" ColumnName="Category_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -240,20 +273,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Questions" >
-        <EntityTypeShape EntityType="Questions.Question" Width="1.5" PointX="0.875" PointY="1.875" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="Questions.Category" Width="1.5" PointX="3.875" PointY="3" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="Questions.Answer" Width="1.5" PointX="3.875" PointY="0.875" Height="1.4033821614583331" />
+        <EntityTypeShape EntityType="Questions.Question" Width="1.5" PointX="2.125" PointY="1.75" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="Questions.Category" Width="1.5" PointX="5.125" PointY="2.875" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="Questions.Answer" Width="1.5" PointX="5.125" PointY="0.75" Height="1.4033821614583331" />
         <AssociationConnector Association="Questions.QuestionCategory">
-          <ConnectorPoint PointX="2.375" PointY="3.4276432291666667" />
-          <ConnectorPoint PointX="3.875" PointY="3.4276432291666667" />
+          <ConnectorPoint PointX="3.625" PointY="3.3026432291666667" />
+          <ConnectorPoint PointX="5.125" PointY="3.3026432291666667" />
         </AssociationConnector>
         <AssociationConnector Association="Questions.QuestionAnswer">
-          <ConnectorPoint PointX="2.375" PointY="2.0766910807291667" />
-          <ConnectorPoint PointX="3.875" PointY="2.0766910807291667" />
+          <ConnectorPoint PointX="3.625" PointY="2.0333638509114582" />
+          <ConnectorPoint PointX="5.125" PointY="2.0333638509114582" />
         </AssociationConnector>
         <AssociationConnector Association="Questions.CorrectQuestionAnswer">
-          <ConnectorPoint PointX="2.375" PointY="1.9541819254557291" />
-          <ConnectorPoint PointX="3.875" PointY="1.9541819254557291" />
+          <ConnectorPoint PointX="3.625" PointY="1.8291819254557291" />
+          <ConnectorPoint PointX="5.125" PointY="1.8291819254557291" />
+        </AssociationConnector>
+        <AssociationConnector Association="Questions.Subcategory">
+          <ConnectorPoint PointX="6.625" PointY="3.5694815705128202" />
+          <ConnectorPoint PointX="6.875" PointY="3.5694815705128202" />
+          <ConnectorPoint PointX="6.875" PointY="4.1748840144230766" />
+          <ConnectorPoint PointX="6.625" PointY="4.1748840144230766" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

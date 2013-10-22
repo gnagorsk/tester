@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/19/2013 20:08:37
--- Generated from EDMX file: c:\users\jajcer\documents\visual studio 2010\Projects\Tester\Questionnaire\Questions.edmx
+-- Date Created: 10/21/2013 19:13:11
+-- Generated from EDMX file: C:\Users\jajcer\documents\visual studio 2010\Projects\Tester\Questionnaire\Questions.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -28,6 +28,9 @@ IF OBJECT_ID(N'[dbo].[FK_QuestionAnswer_Answer]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_CorrectQuestionAnswer]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[QuestionSet] DROP CONSTRAINT [FK_CorrectQuestionAnswer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Subcategory]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategorySet] DROP CONSTRAINT [FK_Subcategory];
 GO
 
 -- --------------------------------------------------
@@ -54,7 +57,6 @@ GO
 -- Creating table 'QuestionSet'
 CREATE TABLE [dbo].[QuestionSet] (
     [id] int IDENTITY(1,1) NOT NULL,
-    [title] nvarchar(max)  NOT NULL,
     [text] nvarchar(max)  NOT NULL,
     [Category_id] int  NOT NULL,
     [CorrectAnswer_id] int  NOT NULL
@@ -64,7 +66,8 @@ GO
 -- Creating table 'CategorySet'
 CREATE TABLE [dbo].[CategorySet] (
     [id] int IDENTITY(1,1) NOT NULL,
-    [text] nvarchar(max)  NOT NULL
+    [text] nvarchar(max)  NOT NULL,
+    [Category_id] int  NULL
 );
 GO
 
@@ -163,6 +166,20 @@ ADD CONSTRAINT [FK_CorrectQuestionAnswer]
 CREATE INDEX [IX_FK_CorrectQuestionAnswer]
 ON [dbo].[QuestionSet]
     ([CorrectAnswer_id]);
+GO
+
+-- Creating foreign key on [Category_id] in table 'CategorySet'
+ALTER TABLE [dbo].[CategorySet]
+ADD CONSTRAINT [FK_Subcategory]
+    FOREIGN KEY ([Category_id])
+    REFERENCES [dbo].[CategorySet]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Subcategory'
+CREATE INDEX [IX_FK_Subcategory]
+ON [dbo].[CategorySet]
+    ([Category_id]);
 GO
 
 -- --------------------------------------------------

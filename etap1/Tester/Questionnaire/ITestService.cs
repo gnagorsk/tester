@@ -4,26 +4,23 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Data.Objects;
 
 namespace Questionnaire
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ITestManagement" in both code and config file together.
     [ServiceContract]
-    public interface ITestManagement
+    public interface ITestService
     {
         [OperationContract]
-        int createCategory(String title, int category);
+        Dictionary<int, String> getCategories();
         [OperationContract]
-        int createQuestion(String text, int category, int correct_answer);
+        Dictionary<int, String> getQuestions(int category);
         [OperationContract]
-        int createAnswer(String text);
+        Dictionary<int, String> getQuestionAnswers(int question);
         [OperationContract]
-        bool addAnswerToQuestion(int answer, int question);
+        bool validateAnswer(int question, int answer);
         [OperationContract]
-        bool removeAnswerFromQuestion(int answer, int question);
-        [OperationContract]
-        bool deleteCategory(int category);
-        [OperationContract]
-        bool deleteQuestion(int question);
+        Dictionary<int, String> getSubcategories(int category);
     }
 }
