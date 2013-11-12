@@ -11,6 +11,13 @@ namespace Questionnaire
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TestManagement" in code, svc and config file together.
     public class TestService : ITestService, ITestManagement
     {
+        private RemoteProcessingError error = new RemoteProcessingError();
+//ex.Title = "Error Funtion:Add()";
+//ex.ExceptionMessage = "Error occur while doing add function.";
+//ex.InnerException = "Inner exception message from serice";
+//ex.StackTrace = "Stack Trace message from service.";
+//throw new FaultException(ex,"Reason: Testing the Fault contract") ;
+
         public Dictionary<int, String> getCategories()
         {
             try
@@ -30,7 +37,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
             
         }
@@ -53,7 +62,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -75,7 +86,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -97,7 +110,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -111,7 +126,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
         
@@ -143,7 +160,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -161,7 +180,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -186,7 +207,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -209,7 +232,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -226,7 +251,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -246,7 +273,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -268,7 +297,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -291,7 +322,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
 
@@ -313,7 +346,9 @@ namespace Questionnaire
             }
             catch (Exception e)
             {
-                throw new FaultException("Fault exception" + e.Message);
+                error.Title = System.Reflection.MethodBase.GetCurrentMethod().Name + " exception";
+                error.ExceptionMessage = e.Message;
+                throw new FaultException<RemoteProcessingError>(error);
             }
         }
     }

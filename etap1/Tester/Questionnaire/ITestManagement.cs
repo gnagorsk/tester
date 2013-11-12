@@ -12,18 +12,31 @@ namespace Questionnaire
     public interface ITestManagement
     {
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         int createCategory(String title, int category);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         int createQuestion(String text, int category, int correct_answer);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         int createAnswer(String text);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         bool addAnswerToQuestion(int answer, int question);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         bool removeAnswerFromQuestion(int answer, int question);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         bool deleteCategory(int category);
+
         [OperationContract]
+        [FaultContract(typeof(RemoteProcessingError))]
         bool deleteQuestion(int question);
     }
 }

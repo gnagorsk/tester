@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a1fd305f-db56-4c8f-8c1d-a656cc6e399b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5f93f2d9-0eff-4221-8ccb-0dd60d987080" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://89.76.59.235//Questionnaire_deploy/TestService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://egreg.no-ip.org//Questionnaire_deploy/TestService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TestService.wsdl" MetadataType="Wsdl" ID="03dbd4e8-5796-478f-b40c-bd75b02649c5" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?wsdl" />
-    <MetadataFile FileName="TestService.xsd" MetadataType="Schema" ID="1100b851-d48f-4ac9-a6ac-c1e7e32f253a" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd2" />
-    <MetadataFile FileName="TestService.disco" MetadataType="Disco" ID="6264e7d1-fd2f-424b-ad4d-1150ab987c23" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?disco" />
-    <MetadataFile FileName="TestService1.xsd" MetadataType="Schema" ID="03d0514d-39cf-4f94-9a84-f8d9466b46c3" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd1" />
-    <MetadataFile FileName="TestService2.xsd" MetadataType="Schema" ID="12b7546d-4067-4def-b6a5-3d408a0fe5f5" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TestService.xsd" MetadataType="Schema" ID="9a673fd1-f382-4c86-9d1c-370d034ad45d" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TestService.wsdl" MetadataType="Wsdl" ID="1aea9609-3a11-4098-8b0a-370bb44f5536" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?wsdl" />
+    <MetadataFile FileName="TestService.disco" MetadataType="Disco" ID="44d39db5-4725-443d-9a29-24fe9c0dbd23" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?disco" />
+    <MetadataFile FileName="TestService1.xsd" MetadataType="Schema" ID="663fef99-2496-4e17-b2d8-4064f88d0285" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TestService2.xsd" MetadataType="Schema" ID="d5635638-88e1-4d6c-8026-78f586914055" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TestService3.xsd" MetadataType="Schema" ID="26c9b087-58f5-4951-af3b-773bed2d5f22" SourceId="1" SourceUrl="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

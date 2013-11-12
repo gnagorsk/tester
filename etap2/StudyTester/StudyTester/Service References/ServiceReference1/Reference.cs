@@ -9,37 +9,105 @@
 //------------------------------------------------------------------------------
 
 namespace StudyTester.ServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
+    [System.SerializableAttribute()]
+    public partial class RemoteProcessingError : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExceptionMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ExceptionMessage {
+            get {
+                return this.ExceptionMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExceptionMessageField, value) != true)) {
+                    this.ExceptionMessageField = value;
+                    this.RaisePropertyChanged("ExceptionMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ITestService")]
     public interface ITestService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getCategories", ReplyAction="http://tempuri.org/ITestService/getCategoriesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestService/getCategoriesRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         System.Collections.Generic.Dictionary<int, string> getCategories();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getCategories", ReplyAction="http://tempuri.org/ITestService/getCategoriesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> getCategoriesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getQuestions", ReplyAction="http://tempuri.org/ITestService/getQuestionsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestService/getQuestionsRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         System.Collections.Generic.Dictionary<int, string> getQuestions(int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getQuestions", ReplyAction="http://tempuri.org/ITestService/getQuestionsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> getQuestionsAsync(int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getQuestionAnswers", ReplyAction="http://tempuri.org/ITestService/getQuestionAnswersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestService/getQuestionAnswersRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         System.Collections.Generic.Dictionary<int, string> getQuestionAnswers(int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getQuestionAnswers", ReplyAction="http://tempuri.org/ITestService/getQuestionAnswersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<int, string>> getQuestionAnswersAsync(int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/validateAnswer", ReplyAction="http://tempuri.org/ITestService/validateAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestService/validateAnswerRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         bool validateAnswer(int question, int answer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/validateAnswer", ReplyAction="http://tempuri.org/ITestService/validateAnswerResponse")]
         System.Threading.Tasks.Task<bool> validateAnswerAsync(int question, int answer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getSubcategories", ReplyAction="http://tempuri.org/ITestService/getSubcategoriesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestService/getSubcategoriesRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         System.Collections.Generic.Dictionary<int, string> getSubcategories(int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestService/getSubcategories", ReplyAction="http://tempuri.org/ITestService/getSubcategoriesResponse")]
@@ -119,42 +187,50 @@ namespace StudyTester.ServiceReference1 {
     public interface ITestManagement {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createCategory", ReplyAction="http://tempuri.org/ITestManagement/createCategoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/createCategoryRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         int createCategory(string title, int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createCategory", ReplyAction="http://tempuri.org/ITestManagement/createCategoryResponse")]
         System.Threading.Tasks.Task<int> createCategoryAsync(string title, int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createQuestion", ReplyAction="http://tempuri.org/ITestManagement/createQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/createQuestionRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         int createQuestion(string text, int category, int correct_answer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createQuestion", ReplyAction="http://tempuri.org/ITestManagement/createQuestionResponse")]
         System.Threading.Tasks.Task<int> createQuestionAsync(string text, int category, int correct_answer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createAnswer", ReplyAction="http://tempuri.org/ITestManagement/createAnswerResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/createAnswerRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         int createAnswer(string text);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/createAnswer", ReplyAction="http://tempuri.org/ITestManagement/createAnswerResponse")]
         System.Threading.Tasks.Task<int> createAnswerAsync(string text);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/addAnswerToQuestion", ReplyAction="http://tempuri.org/ITestManagement/addAnswerToQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/addAnswerToQuestionRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         bool addAnswerToQuestion(int answer, int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/addAnswerToQuestion", ReplyAction="http://tempuri.org/ITestManagement/addAnswerToQuestionResponse")]
         System.Threading.Tasks.Task<bool> addAnswerToQuestionAsync(int answer, int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestion", ReplyAction="http://tempuri.org/ITestManagement/removeAnswerFromQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestionRemoteProcessingErrorF" +
+            "ault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         bool removeAnswerFromQuestion(int answer, int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestion", ReplyAction="http://tempuri.org/ITestManagement/removeAnswerFromQuestionResponse")]
         System.Threading.Tasks.Task<bool> removeAnswerFromQuestionAsync(int answer, int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/deleteCategory", ReplyAction="http://tempuri.org/ITestManagement/deleteCategoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/deleteCategoryRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         bool deleteCategory(int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/deleteCategory", ReplyAction="http://tempuri.org/ITestManagement/deleteCategoryResponse")]
         System.Threading.Tasks.Task<bool> deleteCategoryAsync(int category);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/deleteQuestion", ReplyAction="http://tempuri.org/ITestManagement/deleteQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(StudyTester.ServiceReference1.RemoteProcessingError), Action="http://tempuri.org/ITestManagement/deleteQuestionRemoteProcessingErrorFault", Name="RemoteProcessingError", Namespace="http://schemas.datacontract.org/2004/07/Questionnaire")]
         bool deleteQuestion(int question);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITestManagement/deleteQuestion", ReplyAction="http://tempuri.org/ITestManagement/deleteQuestionResponse")]

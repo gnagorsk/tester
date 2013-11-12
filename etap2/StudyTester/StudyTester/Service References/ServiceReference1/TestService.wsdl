@@ -9,9 +9,10 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Questionnaire" />
+      <xsd:import schemaLocation="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ITestService_getCategories_InputMessage">
@@ -20,11 +21,17 @@
   <wsdl:message name="ITestService_getCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:getCategoriesResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestService_getCategories_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q1:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestService_getQuestions_InputMessage">
     <wsdl:part name="parameters" element="tns:getQuestions" />
   </wsdl:message>
   <wsdl:message name="ITestService_getQuestions_OutputMessage">
     <wsdl:part name="parameters" element="tns:getQuestionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_getQuestions_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q2:RemoteProcessingError" />
   </wsdl:message>
   <wsdl:message name="ITestService_getQuestionAnswers_InputMessage">
     <wsdl:part name="parameters" element="tns:getQuestionAnswers" />
@@ -32,11 +39,17 @@
   <wsdl:message name="ITestService_getQuestionAnswers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getQuestionAnswersResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestService_getQuestionAnswers_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q3:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestService_validateAnswer_InputMessage">
     <wsdl:part name="parameters" element="tns:validateAnswer" />
   </wsdl:message>
   <wsdl:message name="ITestService_validateAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:validateAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestService_validateAnswer_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q4:RemoteProcessingError" />
   </wsdl:message>
   <wsdl:message name="ITestService_getSubcategories_InputMessage">
     <wsdl:part name="parameters" element="tns:getSubcategories" />
@@ -44,11 +57,17 @@
   <wsdl:message name="ITestService_getSubcategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:getSubcategoriesResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestService_getSubcategories_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q5:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestManagement_createCategory_InputMessage">
     <wsdl:part name="parameters" element="tns:createCategory" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_createCategory_OutputMessage">
     <wsdl:part name="parameters" element="tns:createCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestManagement_createCategory_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q6:RemoteProcessingError" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_createQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:createQuestion" />
@@ -56,11 +75,17 @@
   <wsdl:message name="ITestManagement_createQuestion_OutputMessage">
     <wsdl:part name="parameters" element="tns:createQuestionResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestManagement_createQuestion_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q7:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestManagement_createAnswer_InputMessage">
     <wsdl:part name="parameters" element="tns:createAnswer" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_createAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:createAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestManagement_createAnswer_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q8:RemoteProcessingError" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_addAnswerToQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:addAnswerToQuestion" />
@@ -68,11 +93,17 @@
   <wsdl:message name="ITestManagement_addAnswerToQuestion_OutputMessage">
     <wsdl:part name="parameters" element="tns:addAnswerToQuestionResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestManagement_addAnswerToQuestion_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q9:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestManagement_removeAnswerFromQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:removeAnswerFromQuestion" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_removeAnswerFromQuestion_OutputMessage">
     <wsdl:part name="parameters" element="tns:removeAnswerFromQuestionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITestManagement_removeAnswerFromQuestion_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q10:RemoteProcessingError" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_deleteCategory_InputMessage">
     <wsdl:part name="parameters" element="tns:deleteCategory" />
@@ -80,62 +111,80 @@
   <wsdl:message name="ITestManagement_deleteCategory_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteCategoryResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestManagement_deleteCategory_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q11:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:message name="ITestManagement_deleteQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:deleteQuestion" />
   </wsdl:message>
   <wsdl:message name="ITestManagement_deleteQuestion_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteQuestionResponse" />
   </wsdl:message>
+  <wsdl:message name="ITestManagement_deleteQuestion_RemoteProcessingErrorFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Questionnaire" name="detail" element="q12:RemoteProcessingError" />
+  </wsdl:message>
   <wsdl:portType name="ITestService">
     <wsdl:operation name="getCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/getCategories" message="tns:ITestService_getCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/getCategoriesResponse" message="tns:ITestService_getCategories_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/getCategoriesRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestService_getCategories_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="getQuestions">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/getQuestions" message="tns:ITestService_getQuestions_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/getQuestionsResponse" message="tns:ITestService_getQuestions_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/getQuestionsRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestService_getQuestions_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="getQuestionAnswers">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/getQuestionAnswers" message="tns:ITestService_getQuestionAnswers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/getQuestionAnswersResponse" message="tns:ITestService_getQuestionAnswers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/getQuestionAnswersRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestService_getQuestionAnswers_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="validateAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/validateAnswer" message="tns:ITestService_validateAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/validateAnswerResponse" message="tns:ITestService_validateAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/validateAnswerRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestService_validateAnswer_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="getSubcategories">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestService/getSubcategories" message="tns:ITestService_getSubcategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestService/getSubcategoriesResponse" message="tns:ITestService_getSubcategories_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestService/getSubcategoriesRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestService_getSubcategories_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ITestManagement">
     <wsdl:operation name="createCategory">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/createCategory" message="tns:ITestManagement_createCategory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/createCategoryResponse" message="tns:ITestManagement_createCategory_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/createCategoryRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_createCategory_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="createQuestion">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/createQuestion" message="tns:ITestManagement_createQuestion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/createQuestionResponse" message="tns:ITestManagement_createQuestion_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/createQuestionRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_createQuestion_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="createAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/createAnswer" message="tns:ITestManagement_createAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/createAnswerResponse" message="tns:ITestManagement_createAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/createAnswerRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_createAnswer_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="addAnswerToQuestion">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/addAnswerToQuestion" message="tns:ITestManagement_addAnswerToQuestion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/addAnswerToQuestionResponse" message="tns:ITestManagement_addAnswerToQuestion_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/addAnswerToQuestionRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_addAnswerToQuestion_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="removeAnswerFromQuestion">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestion" message="tns:ITestManagement_removeAnswerFromQuestion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestionResponse" message="tns:ITestManagement_removeAnswerFromQuestion_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/removeAnswerFromQuestionRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_removeAnswerFromQuestion_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="deleteCategory">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/deleteCategory" message="tns:ITestManagement_deleteCategory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/deleteCategoryResponse" message="tns:ITestManagement_deleteCategory_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/deleteCategoryRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_deleteCategory_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="deleteQuestion">
       <wsdl:input wsaw:Action="http://tempuri.org/ITestManagement/deleteQuestion" message="tns:ITestManagement_deleteQuestion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITestManagement/deleteQuestionResponse" message="tns:ITestManagement_deleteQuestion_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ITestManagement/deleteQuestionRemoteProcessingErrorFault" name="RemoteProcessingErrorFault" message="tns:ITestManagement_deleteQuestion_RemoteProcessingErrorFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITestService" type="tns:ITestService">
@@ -148,6 +197,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="getQuestions">
       <soap:operation soapAction="http://tempuri.org/ITestService/getQuestions" style="document" />
@@ -157,6 +209,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="getQuestionAnswers">
       <soap:operation soapAction="http://tempuri.org/ITestService/getQuestionAnswers" style="document" />
@@ -166,6 +221,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="validateAnswer">
       <soap:operation soapAction="http://tempuri.org/ITestService/validateAnswer" style="document" />
@@ -175,6 +233,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="getSubcategories">
       <soap:operation soapAction="http://tempuri.org/ITestService/getSubcategories" style="document" />
@@ -184,6 +245,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSHttpBinding_ITestManagement" type="tns:ITestManagement">
@@ -197,6 +261,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="createQuestion">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/createQuestion" style="document" />
@@ -206,6 +273,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="createAnswer">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/createAnswer" style="document" />
@@ -215,6 +285,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="addAnswerToQuestion">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/addAnswerToQuestion" style="document" />
@@ -224,6 +297,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="removeAnswerFromQuestion">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/removeAnswerFromQuestion" style="document" />
@@ -233,6 +309,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="deleteCategory">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/deleteCategory" style="document" />
@@ -242,6 +321,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="deleteQuestion">
       <soap12:operation soapAction="http://tempuri.org/ITestManagement/deleteQuestion" style="document" />
@@ -251,16 +333,19 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="RemoteProcessingErrorFault">
+        <soap12:fault use="literal" name="RemoteProcessingErrorFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="TestService">
     <wsdl:port name="BasicHttpBinding_ITestService" binding="tns:BasicHttpBinding_ITestService">
-      <soap:address location="http://89.76.59.235/Questionnaire_deploy/TestService.svc" />
+      <soap:address location="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc" />
     </wsdl:port>
     <wsdl:port name="WSHttpBinding_ITestManagement" binding="tns:WSHttpBinding_ITestManagement">
-      <soap12:address location="http://89.76.59.235/Questionnaire_deploy/TestService.svc/ws" />
+      <soap12:address location="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc/ws" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://89.76.59.235/Questionnaire_deploy/TestService.svc/ws</wsa10:Address>
+        <wsa10:Address>http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc/ws</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

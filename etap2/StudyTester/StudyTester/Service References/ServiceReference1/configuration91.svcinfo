@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="l9T1uSIy7vAMis+4nBJeACSQv60=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="hQdOxdaS2AoJOY4meaRRKZvZZMQ=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ITestService">
       <properties>
@@ -236,10 +236,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ITestService" contract="ServiceReference1.ITestService" bindingType="basicHttpBinding" address="http://89.76.59.235/Questionnaire_deploy/TestService.svc" bindingConfiguration="BasicHttpBinding_ITestService">
+    <endpoint name="BasicHttpBinding_ITestService" contract="ServiceReference1.ITestService" bindingType="basicHttpBinding" address="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc" bindingConfiguration="BasicHttpBinding_ITestService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://89.76.59.235/Questionnaire_deploy/TestService.svc</serializedValue>
+          <serializedValue>http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -321,10 +321,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="WSHttpBinding_ITestManagement" contract="ServiceReference1.ITestManagement" bindingType="wsHttpBinding" address="http://89.76.59.235/Questionnaire_deploy/TestService.svc/ws" bindingConfiguration="WSHttpBinding_ITestManagement">
+    <endpoint name="WSHttpBinding_ITestManagement" contract="ServiceReference1.ITestManagement" bindingType="wsHttpBinding" address="http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc/ws" bindingConfiguration="WSHttpBinding_ITestManagement">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://89.76.59.235/Questionnaire_deploy/TestService.svc/ws</serializedValue>
+          <serializedValue>http://egreg.no-ip.org/Questionnaire_deploy/TestService.svc/ws</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
