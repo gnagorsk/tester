@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a1fd305f-db56-4c8f-8c1d-a656cc6e399b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://89.76.59.235//Questionnaire_deploy/TestService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TestService.wsdl" MetadataType="Wsdl" ID="03dbd4e8-5796-478f-b40c-bd75b02649c5" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?wsdl" />
+    <MetadataFile FileName="TestService.xsd" MetadataType="Schema" ID="1100b851-d48f-4ac9-a6ac-c1e7e32f253a" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TestService.disco" MetadataType="Disco" ID="6264e7d1-fd2f-424b-ad4d-1150ab987c23" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?disco" />
+    <MetadataFile FileName="TestService1.xsd" MetadataType="Schema" ID="03d0514d-39cf-4f94-9a84-f8d9466b46c3" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TestService2.xsd" MetadataType="Schema" ID="12b7546d-4067-4def-b6a5-3d408a0fe5f5" SourceId="1" SourceUrl="http://89.76.59.235/Questionnaire_deploy/TestService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
