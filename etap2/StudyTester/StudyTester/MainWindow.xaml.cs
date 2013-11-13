@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using StudyTester.ServiceReference1;
+using System.Windows.Media.Animation;
 
 namespace StudyTester
 {
@@ -56,7 +57,27 @@ namespace StudyTester
             {
                 // It works, init the rest! and go to the next page...
                 clicked.Content = "Connected!";
-                clicked.IsEnabled = true;
+
+                Grid[] Screens = { WelcomeScreen, ActionSelect};
+
+                foreach (var grid in Screens)
+                {
+                    ThicknessAnimation ta = new ThicknessAnimation();
+
+                    ta.DecelerationRatio = 0.9;
+
+                    //your first place
+                    ta.From = grid.Margin;
+                    //this move your grid 1000 over from left side
+                    //you can use -1000 to move to left side
+                    Thickness current = grid.Margin;
+                    current.Left -= 500;
+                    ta.To = current;
+                    //time the animation playes
+                    ta.Duration = new Duration(TimeSpan.FromMilliseconds(400));
+                    //dont need to use story board but if you want pause,stop etc use story board
+                    grid.BeginAnimation(Grid.MarginProperty, ta);
+                }
             }
         }
 
@@ -78,6 +99,27 @@ namespace StudyTester
             }
 
             e.Result = result;
+        }
+
+        private void ManageButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Manage ManageWindow = new Manage();
+            this.Hide();
+            ManageWindow.ShowDialog();
+            this.Show();
+        }
+
+        private void TestButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Test TestWindow = new Test();
+            this.Hide();
+            TestWindow.ShowDialog();
+            this.Show();
+        }
+
+        private void ExitButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
