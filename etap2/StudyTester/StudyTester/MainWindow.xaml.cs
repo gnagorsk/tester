@@ -23,6 +23,10 @@ namespace StudyTester
     /// </summary>
     public partial class MainWindow : Window
     {
+        DoubleAnimationUsingKeyFrames
+                    popButtonX = new DoubleAnimationUsingKeyFrames(),
+                    popButtonY = new DoubleAnimationUsingKeyFrames();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -56,28 +60,86 @@ namespace StudyTester
             else
             {
                 // It works, init the rest! and go to the next page...
+                
                 clicked.Content = "Connected!";
+                clicked.Click -= Button_Click_1;
+                clicked.IsEnabled = true;
 
-                Grid[] Screens = { WelcomeScreen, ActionSelect};
 
-                foreach (var grid in Screens)
-                {
-                    ThicknessAnimation ta = new ThicknessAnimation();
+                //<DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="2" Duration="0:0:0.5" />    
+                //<DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="2" Duration="0:0:0.5" />
 
-                    ta.DecelerationRatio = 0.9;
+                int DurationMilis = 300;
 
-                    //your first place
-                    ta.From = grid.Margin;
-                    //this move your grid 1000 over from left side
-                    //you can use -1000 to move to left side
-                    Thickness current = grid.Margin;
-                    current.Left -= 500;
-                    ta.To = current;
-                    //time the animation playes
-                    ta.Duration = new Duration(TimeSpan.FromMilliseconds(400));
-                    //dont need to use story board but if you want pause,stop etc use story board
-                    grid.BeginAnimation(Grid.MarginProperty, ta);
-                }
+                popButtonX.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Width, KeyTime.FromPercent(0)));
+                popButtonX.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Width + 20, KeyTime.FromPercent(0.5)));
+                popButtonX.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Width, KeyTime.FromPercent(1)));
+
+                popButtonY.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Height, KeyTime.FromPercent(0)));
+                popButtonY.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Height + 20, KeyTime.FromPercent(0.5)));
+                popButtonY.KeyFrames.Add(new LinearDoubleKeyFrame(StartButton.Height, KeyTime.FromPercent(1)));
+
+                popButtonX.Completed += popButtonX_Completed;
+
+                popButtonY.Duration = popButtonX.Duration = new Duration(TimeSpan.FromMilliseconds(DurationMilis));
+
+                StartButton.BeginAnimation(Button.WidthProperty, popButtonX);
+                StartButton.BeginAnimation(Button.HeightProperty, popButtonY);
+
+                
+                //ScaleTransform RectXForm = new ScaleTransform();
+                //StartButton.RenderTransform = RectXForm;
+
+                //Storyboard buttonStory = new Storyboard();
+
+                //buttonStory.Children.Add(popButtonX);
+                //buttonStory.Children.Add(popButtonY);
+
+                //Storyboard.SetTarget(popButtonX, StartButton);
+                //Storyboard.SetTarget(popButtonY, StartButton);
+                //Storyboard.SetTargetProperty(popButtonX, new PropertyPath(StartButton.RenderTransform));
+                //Storyboard.SetTargetProperty(popButtonY, new PropertyPath(StartButton.RenderTransform));
+
+                //buttonStory.Begin();
+                //Execution
+                //RectXForm.BeginAnimation(ScaleTransform.ScaleXProperty, popButtonX);
+                //RectXForm.BeginAnimation(ScaleTransform.ScaleXProperty, popButtonY);
+                //RectXForm.BeginAnimation(ScaleTransform.ScaleYProperty, growImageY);
+
+                
+                //DoubleAnimation buttonPop = new DoubleAnimation();
+
+                //buttonPop.From = 1;
+                //buttonPop.To = 2;
+
+                //buttonPop.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+
+                //StartButton.BeginAnimation(ScaleTransform.ScaleXProperty, buttonPop);
+
+                
+            }
+        }
+
+        private void popButtonX_Completed(object sender, EventArgs e)
+        {
+            Grid[] Screens = { WelcomeScreen, ActionSelect };
+
+            foreach (var grid in Screens)
+            {
+                ThicknessAnimation ta = new ThicknessAnimation();
+                ta.DecelerationRatio = 0.9;
+
+                //your first place
+                ta.From = grid.Margin;
+                //this move your grid 1000 over from left side
+                //you can use -1000 to move to left side
+                Thickness current = grid.Margin;
+                current.Left -= 500;
+                ta.To = current;
+                //time the animation playes
+                ta.Duration = new Duration(TimeSpan.FromMilliseconds(400));
+                //dont need to use story board but if you want pause,stop etc use story board
+                grid.BeginAnimation(Grid.MarginProperty, ta);
             }
         }
 

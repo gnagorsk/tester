@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Manage" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}">
     <Grid>
-        
+        <TreeView Name="CategoryTree" HorizontalAlignment="Left" Height="248" Margin="10,34,0,0" VerticalAlignment="Top" Width="333" RenderTransformOrigin="0.482,0.206" Initialized="TreeView_Initialized_1">
+            
+        </TreeView>
+
     </Grid>
 </Window>
