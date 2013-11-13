@@ -1,8 +1,32 @@
 ﻿<Window x:Class="StudyTester.Test"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Test" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}">
+        Title="Test" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}" Height="557.176" Width="671.176">
     <Grid>
+        <TabControl HorizontalAlignment="Left" Height="500
+                    " Margin="10,10,0,0" VerticalAlignment="Top" Width="640">
+            <TabItem x:Name="CategoryTab" Header="Category">
+                <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="635" Margin="0,-2,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="55*"/>
+                        <ColumnDefinition Width="36*"/>
+                        <ColumnDefinition Width="627*"/>
+                    </Grid.ColumnDefinitions>
+                    <TreeView x:Name="CategoryTree" HorizontalAlignment="Left" Height="295" Margin="10,10,0,0" VerticalAlignment="Top" Width="613" Grid.ColumnSpan="3"/>
+                    <Button Content="Go!" HorizontalAlignment="Left" Margin="48.358,374,0,0" VerticalAlignment="Top" Width="358" Height="49" Grid.Column="2" Click="Button_Click_1"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="QuestionsTab" Header="Questions" IsEnabled="False">
+                <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="635" Margin="0,0,-1,0" RenderTransformOrigin="0.502,0.5">
+                    <Label x:Name="QuestionsLeft" Content="Questions: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="QuestionText" Content="" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                    <ListBox x:Name="AnswerList" HorizontalAlignment="Left" Height="277" Margin="10,133,0,0" VerticalAlignment="Top" Width="615"/>
+                    <Button x:Name="CheckAnswer" Content="Check" HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="535" Height="47" Click="CheckAnswer_Click"/>
+                    <Button x:Name="SkipQuestion" Content="Skip" HorizontalAlignment="Left" Margin="550,415,0,0" VerticalAlignment="Top" Width="75" Height="47" Click="SkipQuestion_Click"/>
+                    <Label x:Name="Correctness" Content="" HorizontalAlignment="Left" Margin="526,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.016"/>
+                </Grid>
+            </TabItem>
+        </TabControl>        
         
     </Grid>
 </Window>
