@@ -31,6 +31,7 @@ namespace StudyTester
                     c.Header = v.Value;
                     c.Tag = v.Key;
                     fillSubcategories(c, v.Key);
+                    parent.Items.Add(c);
                 }
             }
         }
