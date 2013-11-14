@@ -311,8 +311,8 @@ namespace Questionnaire
                 var res = (from c in db.CategorySet where c.id == category select c);
                 if (res.Count() == 0) return false;
 
-                //if (res.First().Question.Count != 0) return false;
-                //if (res.First().Subcategories.Count != 0) return false;
+                if (res.First().Question.Count != 0) return false;
+                if (res.First().Subcategories.Count != 0) return false;
 
                 db.CategorySet.DeleteObject(res.First());
 
@@ -336,7 +336,7 @@ namespace Questionnaire
                 var res = (from q in db.QuestionSet where q.id == question select q);
                 if (res.Count() == 0) return false;
 
-               // if (res.First().Answers.Count != 0) return false;
+                if (res.First().Answers.Count != 0) return false;
 
                 db.QuestionSet.DeleteObject(res.First());
 

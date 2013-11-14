@@ -176,28 +176,19 @@
           <Property Type="String" Name="text" Nullable="false" />
         </EntityType>
         <Association Name="QuestionCategory">
-          <End Type="Questions.Question" Role="Question" Multiplicity="*" >
-          </End>
-          <End Type="Questions.Category" Role="Category" Multiplicity="1" >
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="Questions.Question" Role="Question" Multiplicity="*" />
+          <End Type="Questions.Category" Role="Category" Multiplicity="1" />
         </Association>
         <Association Name="QuestionAnswer">
-          <End Type="Questions.Question" Role="Question" Multiplicity="*" >
-          </End>
-          <End Type="Questions.Answer" Role="Answer" Multiplicity="*" >
-          </End>
+          <End Type="Questions.Question" Role="Question" Multiplicity="*" />
+          <End Type="Questions.Answer" Role="Answer" Multiplicity="*" />
         </Association>
         <Association Name="CorrectQuestionAnswer">
-          <End Type="Questions.Question" Role="Question" Multiplicity="*" >
-          </End>
-          <End Type="Questions.Answer" Role="Answer" Multiplicity="1" >
-          </End>
+          <End Type="Questions.Question" Role="Question" Multiplicity="*" />
+          <End Type="Questions.Answer" Role="Answer" Multiplicity="1" />
         </Association>
         <Association Name="Subcategory">
-          <End Type="Questions.Category" Role="Category" Multiplicity="0..1" >
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="Questions.Category" Role="Category" Multiplicity="0..1" />
           <End Type="Questions.Category" Role="Category1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
