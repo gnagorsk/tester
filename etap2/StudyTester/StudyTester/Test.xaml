@@ -33,7 +33,7 @@
                 <Grid>
                     <my1:QrCodeImgControl x:Name="qrScore" Height="232" Width="378" Margin="129,110,127,130" Text="0/10"/>
                     <Label Content="You have scored:" HorizontalAlignment="Left" Margin="48,52,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Share with your phone!" HorizontalAlignment="Left" Margin="253,342,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Share with your mobile companion!" HorizontalAlignment="Left" Margin="217,342,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="txtScore" Content="0/0" HorizontalAlignment="Left" Margin="148,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.184,-0.154"/>
                 </Grid>
             </TabItem>
