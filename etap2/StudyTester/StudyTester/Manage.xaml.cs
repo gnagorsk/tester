@@ -110,7 +110,7 @@ namespace StudyTester
             if (Categories.SelectedCategoryId != -1)
             {
                 MoveRight();
-                // Add some init functions
+                Questions.InitForCategory(Categories.SelectedCategoryId);
             }
         }
 
