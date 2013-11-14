@@ -16,6 +16,14 @@ namespace StudyTester
 
         BackgroundWorker loader = new BackgroundWorker();
 
+        public int Id
+        {
+            get
+            {
+                return CategoryId;
+            }
+        }
+
         public CategoryTreeItem(int id=-1, string header="Availible categories:")
             : base()
         {

@@ -15,5 +15,18 @@ namespace StudyTester
             CategoryTreeItem root = new CategoryTreeItem();
             Items.Add(root);
         }
+
+        public int GetSelectedCategoryId()
+        {
+            if (SelectedItem is CategoryTreeItem)
+            {
+                CategoryTreeItem item = (CategoryTreeItem)SelectedItem;
+                return item.Id;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 }

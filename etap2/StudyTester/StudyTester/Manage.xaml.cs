@@ -24,9 +24,9 @@ namespace StudyTester
             InitializeComponent();
         }
 
-        private void TreeView_Initialized_1(object sender, EventArgs e)
+        private void CategoryTree_SelectedItemChanged_1(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            
+            SelectedCat.Content = Categories.GetSelectedCategoryId();
         }
     }
 }
