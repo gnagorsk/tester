@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,19 +65,10 @@ namespace StudyTester
 
         private int answered_questions { get; set; }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private int selectedCategory { get; set; }
+
+        private void loadQuestions(object sender, DoWorkEventArgs e)
         {
-            CategoryTab.IsSelected = false;
-            CategoryTab.IsEnabled = false;
-            QuestionsTab.IsEnabled = true;
-            QuestionsTab.IsSelected = true;
-
-            answered_questions = 0;
-
-            int selectedCategory = catTree.GetSelectedCategoryId();
-
-            if (selectedCategory == -1) return;
-
             using (TestServiceClient ServiceConnection = new TestServiceClient())
             {
                 Dictionary<int, String> squestions = ServiceConnection.getQuestions(selectedCategory);
@@ -91,15 +83,36 @@ namespace StudyTester
                     questions.Add(q);
                 }
             }
+        }
 
+        private void loadQuestionsComplete(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CategoryTab.IsSelected = false;
+            CategoryTab.IsEnabled = false;
+            QuestionsTab.IsEnabled = true;
+            QuestionsTab.IsSelected = true;
+
+            showNext();
+
+            answered_questions = 0;
             QuestionsLeft.Content = "Questions left: " + answered_questions + "/" + questions.Count;
 
             if (questions.Count == 0)
             {
                 CheckAnswer.Content = "Score";
             }
+        }
 
-            showNext();
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            selectedCategory = catTree.GetSelectedCategoryId();
+
+            if (selectedCategory == -1) return;
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += loadQuestions;
+            worker.RunWorkerCompleted += loadQuestionsComplete;
+            worker.RunWorkerAsync(this);
         }
 
         TestQuestion current;
@@ -169,33 +182,39 @@ namespace StudyTester
             }
             else
             {
-                if (AnswerList.SelectedItem == null) return;
-                SkipQuestion.IsEnabled = false;
-                TestAnswer answer = (TestAnswer)AnswerList.SelectedItem;
-                using (TestServiceClient ServiceConnection = new TestServiceClient())
+                validateAnswer();
+            }
+        }
+
+        public async void validateAnswer()
+        {
+            if (AnswerList.SelectedItem == null) return;
+            SkipQuestion.IsEnabled = false;
+            TestAnswer answer = (TestAnswer)AnswerList.SelectedItem;
+            using (TestServiceClient ServiceConnection = new TestServiceClient())
+            {
+                current.skipped = false;
+                var validateAnswerTask = ServiceConnection.validateAnswerAsync(current.id, answer.id);
+                bool correct = await validateAnswerTask;
+                if (correct)
                 {
-                    current.skipped = false;
-                    bool correct = ServiceConnection.validateAnswer(current.id, answer.id);
-                    if (correct)
-                    {
-                        Correctness.Content = "Correct!";
-                        QuestionsLeft.Content = "Questions left: " + ++answered_questions + "/" + questions.Count;
-                    }
-                    else
-                    {
-                        Correctness.Content = "Wrong!";
-                    }
-                    if (checkNext() != null)
-                    {
-                        CheckAnswer.Content = "Next";
-                    }
-                    else
-                    {
-                        AnswerList.ItemsSource = null;
-                        QuestionText.Content = "Congratulations, you have answered all the questions.";
-                        CheckAnswer.Content = "Score";
-                        SkipQuestion.IsEnabled = false;
-                    }
+                    Correctness.Content = "Correct!";
+                    QuestionsLeft.Content = "Correct answers: " + ++answered_questions + "/" + questions.Count;
+                }
+                else
+                {
+                    Correctness.Content = "Wrong!";
+                }
+                if (checkNext() != null)
+                {
+                    CheckAnswer.Content = "Next";
+                }
+                else
+                {
+                    AnswerList.ItemsSource = null;
+                    QuestionText.Content = "Congratulations, you have answered all the questions.";
+                    CheckAnswer.Content = "Score";
+                    SkipQuestion.IsEnabled = false;
                 }
             }
         }
