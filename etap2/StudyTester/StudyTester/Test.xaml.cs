@@ -31,6 +31,7 @@ namespace StudyTester
                     c.Header = v.Value;
                     c.Tag = v.Key;
                     fillSubcategories(c, v.Key);
+                    parent.Items.Add(c);
                 }
             }
         }
@@ -121,6 +122,11 @@ namespace StudyTester
 
             QuestionsLeft.Content = "Questions left: " + answered_questions + "/" + questions.Count;
 
+            if (questions.Count == 0)
+            {
+                CheckAnswer.Content = "Score";
+            }
+
             showNext();
         }
 
@@ -129,26 +135,7 @@ namespace StudyTester
         public void showNext()
         {
             Correctness.Content = "";
-            current = null;
-            foreach(TestQuestion q in questions) {
-                if (q.shown == false && q.skipped == false)
-                {
-                    current = q;
-                    break;
-                }
-            }
-
-            if (current == null)
-            {
-                foreach (TestQuestion q in questions)
-                {
-                    if (q.shown == false && q.skipped == true)
-                    {
-                        current = q;
-                        break;
-                    }
-                }
-            }
+            current = checkNext();
 
             if (current != null)
             {
@@ -156,14 +143,34 @@ namespace StudyTester
                 QuestionText.Content = current.text;
                 AnswerList.ItemsSource = current.answers;
             }
-            else
-            {
-                AnswerList.ItemsSource = null;
-                QuestionText.Content = "Congratulations, you have answered all the questions.";
-                CheckAnswer.Content = "Close";
-                SkipQuestion.IsEnabled = false;
-            }
             
+        }
+
+        private TestQuestion checkNext()
+        {
+            TestQuestion next = null;
+            foreach (TestQuestion q in questions)
+            {
+                if (q.shown == false && q.skipped == false)
+                {
+                    next = q;
+                    break;
+                }
+            }
+
+            if (next == null)
+            {
+                foreach (TestQuestion q in questions)
+                {
+                    if (q.shown == false && q.skipped == true)
+                    {
+                        next = q;
+                        break;
+                    }
+                }
+            }
+
+            return next;
         }
 
         private void CheckAnswer_Click(object sender, RoutedEventArgs e)
@@ -174,9 +181,14 @@ namespace StudyTester
                 SkipQuestion.IsEnabled = true;
                 showNext();
             }
-            else if (CheckAnswer.Content.Equals("Close"))
+            else if (CheckAnswer.Content.Equals("Score"))
             {
-                Hide();
+                QuestionsTab.IsEnabled = false;
+                QuestionsTab.IsSelected = false;
+                txtScore.Content = answered_questions + "/" + questions.Count;
+                qrScore.Text = answered_questions + "/" + questions.Count;
+                ScoreTab.IsEnabled = true;
+                ScoreTab.IsSelected = true;
             }
             else
             {
@@ -194,7 +206,17 @@ namespace StudyTester
                     {
                         Correctness.Content = "Wrong!";
                     }
-                    CheckAnswer.Content = "Next";
+                    if (checkNext() != null)
+                    {
+                        CheckAnswer.Content = "Next";
+                    }
+                    else
+                    {
+                        AnswerList.ItemsSource = null;
+                        QuestionText.Content = "Congratulations, you have answered all the questions.";
+                        CheckAnswer.Content = "Score";
+                        SkipQuestion.IsEnabled = false;
+                    }
                 }
             }
         }

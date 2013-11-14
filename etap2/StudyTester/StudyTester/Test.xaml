@@ -1,6 +1,8 @@
 ﻿<Window x:Class="StudyTester.Test"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding"
+        xmlns:my1="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding"
         Title="Test" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}" Height="557.176" Width="671.176">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="500
@@ -24,6 +26,14 @@
                     <Button x:Name="CheckAnswer" Content="Check" HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="535" Height="47" Click="CheckAnswer_Click"/>
                     <Button x:Name="SkipQuestion" Content="Skip" HorizontalAlignment="Left" Margin="550,415,0,0" VerticalAlignment="Top" Width="75" Height="47" Click="SkipQuestion_Click"/>
                     <Label x:Name="Correctness" Content="" HorizontalAlignment="Left" Margin="526,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.018,-0.016"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ScoreTab" Header="Score" IsEnabled="False">
+                <Grid>
+                    <my1:QrCodeImgControl x:Name="qrScore" Height="232" Width="378" Margin="129,110,127,130" Text="0/10"/>
+                    <Label Content="You have scored:" HorizontalAlignment="Left" Margin="48,52,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Share with your phone!" HorizontalAlignment="Left" Margin="253,342,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="txtScore" Content="0/0" HorizontalAlignment="Left" Margin="148,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.184,-0.154"/>
                 </Grid>
             </TabItem>
         </TabControl>        
