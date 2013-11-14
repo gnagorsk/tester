@@ -26,11 +26,7 @@ namespace StudyTester
 
         private void TreeView_Initialized_1(object sender, EventArgs e)
         {
-            TreeViewItem root = new TreeViewItem();
-
-            root.Name = "Categories:";
-
-            CategoryTree.Items.Add(root);
+            
         }
     }
 }
