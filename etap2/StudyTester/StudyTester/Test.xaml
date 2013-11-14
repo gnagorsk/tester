@@ -22,7 +22,7 @@
             <TabItem x:Name="QuestionsTab" Header="Questions" IsEnabled="False">
                 <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="635" Margin="0,0,-1,0" RenderTransformOrigin="0.502,0.5">
                     <Label x:Name="QuestionsLeft" Content="Questions: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="QuestionText" Content="" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="QuestionText" Text="" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" TextWrapping="WrapWithOverflow"/>
                     <ListBox x:Name="AnswerList" HorizontalAlignment="Left" Height="277" Margin="10,133,0,0" VerticalAlignment="Top" Width="615"/>
                     <Button x:Name="CheckAnswer" Content="Check" HorizontalAlignment="Left" Margin="10,415,0,0" VerticalAlignment="Top" Width="535" Height="47" Click="CheckAnswer_Click"/>
                     <Button x:Name="SkipQuestion" Content="Skip" HorizontalAlignment="Left" Margin="550,415,0,0" VerticalAlignment="Top" Width="75" Height="47" Click="SkipQuestion_Click"/>

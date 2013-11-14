@@ -34,7 +34,7 @@ namespace StudyTester
             deleter.RunWorkerCompleted += deleter_RunWorkerCompleted;
         }
 
-        public int SelectedQuestion
+        public int SelectedAnswer
         {
             get
             {
