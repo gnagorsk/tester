@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using StudyTester.ServiceReference1;
 
 namespace StudyTester
 {
@@ -87,7 +88,7 @@ namespace StudyTester
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             AddButton.IsEnabled = false;
-            Categories.AddSubCategory("TestHardCodedName", EnableButtons);
+            Categories.AddSubCategory(categoryName.Text, EnableButtons);
         }
 
         public void EnableButtons()
@@ -135,33 +136,58 @@ namespace StudyTester
             // 1000 <- 500
         }
 
-        private void MarkerButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (AnswersList.SelectedAnswer != -1)
-            {
-                AnswersList.MarkSelectedAsRight();
-            }
-        }
-
         private void QAddButton_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            var dialog = new NewQuestion();
+            if (dialog.ShowDialog() == true)
+            {
+                using (TestManagementClient manage = new TestManagementClient())
+                {
+                    int answer = manage.createAnswer(dialog.answerText.Text);
+                    manage.createQuestion(dialog.questionText.Text, Categories.SelectedCategoryId, answer);
+                }
+            }
         }
 
         private void QRemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
+            int qId = Questions.SelectedQuestion;
+            if (qId == -1) return;
             
+            TestManagementClient manage = new TestManagementClient();
+            TestServiceClient client = new TestServiceClient();
+            
+            foreach(var a in client.getQuestionAnswers(qId)) 
+            {
+                manage.removeAnswerFromQuestion(a.Key, qId);
+            }
+            
+            manage.deleteQuestion(qId);
         }
 
         private void AAddButton_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            AnswersList.AddAnswer(Microsoft.VisualBasic.Interaction.InputBox("Please provide the answer:", "Answer input", "Your answer."));
+            int qId = Questions.SelectedQuestion;
+            if (qId == -1) return;
+
+            TestManagementClient manage = new TestManagementClient();
+            int aId = manage.createAnswer(answerText.Text);
+
+            manage.addAnswerToQuestion(aId, qId);
+
         }
 
         private void ARemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
-            AnswersList.RemoveSelected();
+            int qId = Questions.SelectedQuestion;
+            if (qId == -1) return;
+
+            int aId = AnswersList.SelectedAnswer;
+            if (aId == -1) return;
+
+            TestManagementClient manage = new TestManagementClient();
+            manage.removeAnswerFromQuestion(aId, qId);
+
         }
 
         

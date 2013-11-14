@@ -130,7 +130,7 @@ namespace StudyTester
                     SkipQuestion.IsEnabled = true;
                 }
                 current.shown = true;
-                QuestionText.Content = current.text;
+                QuestionText.Text = current.text;
                 AnswerList.ItemsSource = current.answers;
             }
             
@@ -212,7 +212,7 @@ namespace StudyTester
                 else
                 {
                     AnswerList.ItemsSource = null;
-                    QuestionText.Content = "Congratulations, you have answered all the questions.";
+                    QuestionText.Text = "Congratulations, you have answered all the questions.";
                     CheckAnswer.Content = "Score";
                     SkipQuestion.IsEnabled = false;
                 }

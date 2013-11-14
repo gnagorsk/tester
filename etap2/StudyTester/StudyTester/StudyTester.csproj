@@ -67,6 +67,9 @@
     <Compile Include="Manage.xaml.cs">
       <DependentUpon>Manage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewQuestion.xaml.cs">
+      <DependentUpon>NewQuestion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QuestionsList.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -89,6 +92,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Manage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewQuestion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

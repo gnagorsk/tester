@@ -1,0 +1,13 @@
+﻿<Window x:Class="StudyTester.NewQuestion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NewQuestion" Height="310" Width="500" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}">
+    <Grid>
+        <TextBox x:Name="questionText" HorizontalAlignment="Left" Height="76" Margin="10,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="474" AcceptsReturn="True"/>
+        <TextBox x:Name="answerText" HorizontalAlignment="Left" Height="81" Margin="10,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="474" AcceptsReturn="True"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="224" Height="47" Click="Button_Click_1"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="260,224,0,0" VerticalAlignment="Top" Width="224" Height="47" Click="Button_Click_2"/>
+        <Label Content="Question" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+        <Label Content="Correct answer:" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
