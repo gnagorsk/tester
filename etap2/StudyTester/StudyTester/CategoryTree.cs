@@ -50,13 +50,14 @@ namespace StudyTester
         {
             int id = (int)e.Argument;
 
+            using (TestServiceClient client = new TestServiceClient())
             using (TestManagementClient manage = new TestManagementClient())
             {
                 try
                 {
                     if (id > 0)
                     {
-                        manage.deleteCategory(id);
+                        deleteCategory(client, manage, id);// manage.deleteCategory(id);
                     }
                     e.Result = "Success";
                 }
@@ -65,6 +66,37 @@ namespace StudyTester
                     e.Result = error.Message;
                 }
             }
+        }
+
+        void deleteCategory(TestServiceClient client, TestManagementClient manage, int id)
+        {
+            Dictionary<int, string> subCategories = client.getSubcategories(id);
+
+            foreach (var pair in subCategories)
+            {
+                deleteCategory(client, manage, pair.Key);
+            }
+
+            Dictionary<int, string> questions = client.getQuestions(id);
+
+            foreach (var pair in questions)
+            {
+                deleteQuestion(client, manage, pair.Key);
+            }
+
+            manage.deleteCategory(id);
+        }
+
+        void deleteQuestion(TestServiceClient client, TestManagementClient manage, int id)
+        {
+            Dictionary<int, string> answers = client.getQuestionAnswers(id);
+
+            foreach (var pair in answers)
+            {
+                manage.removeAnswerFromQuestion(pair.Key, id);
+            }
+
+            manage.deleteQuestion(id);
         }
 
         void addCat_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -145,6 +177,8 @@ namespace StudyTester
         {
             if (SelectedCategoryId != -1)
             {
+                functionToCall = function;
+
                 if (((TreeViewItem)SelectedItem).Parent is CategoryTreeItem)
                 {
                     selectedParent = (CategoryTreeItem)((TreeViewItem)SelectedItem).Parent;
@@ -158,10 +192,6 @@ namespace StudyTester
         {
             object[] arg = { SelectedCategoryId, catName };
             functionToCall = function;
-            if (addCat.IsBusy)
-            {
-                System.Windows.MessageBox.Show("LOL!");
-            }
             addCat.RunWorkerAsync(arg);
             this.IsEnabled = false;
         }

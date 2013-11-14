@@ -16,6 +16,8 @@ namespace StudyTester
 
         int correctAnswer = 0;
 
+        public CallbackAfterRPC functionToCall = null;
+
         BackgroundWorker
             loader = new BackgroundWorker(),
             adder = new BackgroundWorker(),
@@ -49,6 +51,11 @@ namespace StudyTester
             else
             {
                 System.Windows.MessageBox.Show((string)result[1]);
+                if (functionToCall != null)
+                {
+                    functionToCall();
+                    functionToCall = null;
+                }
             }
         }
 
@@ -93,21 +100,39 @@ namespace StudyTester
             }
         }
 
-        public void MarkSelectedAsRight()
+        public void MarkSelectedAsRight(CallbackAfterRPC completionRoutine)
         {
+            functionToCall = completionRoutine;
             if (SelectedAnswer != -1)
             {
                 object[] arg = { questionId, SelectedAnswer };
                 marker.RunWorkerAsync(arg);
             }
+            else
+            {
+                if (functionToCall != null)
+                {
+                    functionToCall();
+                    functionToCall = null;
+                }
+            }
         }
 
-        public void RemoveSelected()
+        public void RemoveSelected(CallbackAfterRPC completionRoutine)
         {
+            functionToCall = completionRoutine;
             if (SelectedAnswer != -1)
             {
                 object[] arg = { questionId, SelectedAnswer };
                 deleter.RunWorkerAsync(arg);
+            }
+            else
+            {
+                if (functionToCall != null)
+                {
+                    functionToCall();
+                    functionToCall = null;
+                }
             }
         }
 
@@ -125,8 +150,6 @@ namespace StudyTester
                 try
                 {
                     manager.removeAnswerFromQuestion(answerId, questionId);
-                    //manager.
-                    //manager.markAsCorrect(questionId, answerId);
                 }
                 catch (Exception error)
                 {
@@ -138,8 +161,9 @@ namespace StudyTester
             e.Result = arg;
         }
 
-        public void AddAnswer(string body)
+        public void AddAnswer(string body, CallbackAfterRPC completionRoutine)
         {
+            functionToCall = completionRoutine;
             object[] arg = { questionId, body };
             adder.RunWorkerAsync(arg);
         }
@@ -198,6 +222,12 @@ namespace StudyTester
             else
             {
                 System.Windows.MessageBox.Show((string)result[1]);
+            }
+
+            if (functionToCall != null)
+            {
+                functionToCall();
+                functionToCall = null;
             }
 
             IsEnabled = true;

@@ -87,17 +87,48 @@ namespace StudyTester
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AddButton.IsEnabled = false;
-            Categories.AddSubCategory(categoryName.Text, EnableButtons);
+            InputDialog newAnswer = new InputDialog("Please provide your cathegory:", "Cathegory name:", "Example name.");
+
+            if (newAnswer.ShowDialog() == true)
+            {
+                DisableButtons();
+                Categories.AddSubCategory(newAnswer.TypedText, EnableButtons);
+            }
         }
 
         public void EnableButtons()
         {
+            QuestionsButton.IsEnabled = true;
             AddButton.IsEnabled = true;
+            RemoveButton.IsEnabled = true;
+            ExitButton.IsEnabled = true;
+            AnswersButton.IsEnabled = true;
+            QAddButton.IsEnabled = true;
+            QRemoveButton.IsEnabled = true;
+            BackToCategoryButton.IsEnabled = true;
+            AAddButton.IsEnabled = true;
+            ARemoveButton.IsEnabled = true;
+            BackToQuestionsButton.IsEnabled = true;
+        }
+
+        public void DisableButtons()
+        {
+            QuestionsButton.IsEnabled = false;
+            AddButton.IsEnabled = false;
+            RemoveButton.IsEnabled = false;
+            ExitButton.IsEnabled = false;
+            AnswersButton.IsEnabled = false;
+            QAddButton.IsEnabled = false;
+            QRemoveButton.IsEnabled = false;
+            BackToCategoryButton.IsEnabled = false;
+            AAddButton.IsEnabled = false;
+            ARemoveButton.IsEnabled = false;
+            BackToQuestionsButton.IsEnabled = false;
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
+            DisableButtons();
             Categories.DeleteSelectedCategory(EnableButtons);
         }
 
@@ -111,6 +142,8 @@ namespace StudyTester
             if (Categories.SelectedCategoryId != -1)
             {
                 MoveRight();
+                Questions.functionToCall = EnableButtons;
+                DisableButtons();
                 Questions.InitForCategory(Categories.SelectedCategoryId);
             }
         }
@@ -120,6 +153,8 @@ namespace StudyTester
             if (Questions.SelectedItem != null)
             {
                 MoveRight();
+                DisableButtons();
+                AnswersList.functionToCall = EnableButtons;
                 AnswersList.InitForQuestion(Questions.SelectedQuestion);
             }
         }
@@ -141,52 +176,66 @@ namespace StudyTester
             var dialog = new NewQuestion();
             if (dialog.ShowDialog() == true)
             {
-                using (TestManagementClient manage = new TestManagementClient())
-                {
-                    int answer = manage.createAnswer(dialog.answerText.Text);
-                    manage.createQuestion(dialog.questionText.Text, Categories.SelectedCategoryId, answer);
-                }
+                //using (TestManagementClient manage = new TestManagementClient())
+                //{
+                //    int answer = manage.createAnswer(dialog.answerText.Text);
+                //    manage.createQuestion(dialog.questionText.Text, Categories.SelectedCategoryId, answer);
+                //}
+                DisableButtons();
+                Questions.AddQuestion(dialog.questionText.Text, dialog.answerText.Text, EnableButtons);
             }
         }
 
         private void QRemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
-            int qId = Questions.SelectedQuestion;
-            if (qId == -1) return;
+            //int qId = Questions.SelectedQuestion;
+            //if (qId == -1) return;
             
-            TestManagementClient manage = new TestManagementClient();
-            TestServiceClient client = new TestServiceClient();
+            //TestManagementClient manage = new TestManagementClient();
+            //TestServiceClient client = new TestServiceClient();
             
-            foreach(var a in client.getQuestionAnswers(qId)) 
-            {
-                manage.removeAnswerFromQuestion(a.Key, qId);
-            }
+            //foreach(var a in client.getQuestionAnswers(qId)) 
+            //{
+            //    manage.removeAnswerFromQuestion(a.Key, qId);
+            //}
             
-            manage.deleteQuestion(qId);
+            //manage.deleteQuestion(qId);
+            DisableButtons();
+            Questions.RemoveSelectedQuestion(EnableButtons);
         }
 
         private void AAddButton_Click_1(object sender, RoutedEventArgs e)
         {
-            int qId = Questions.SelectedQuestion;
-            if (qId == -1) return;
+            //int qId = Questions.SelectedQuestion;
+            //if (qId == -1) return;
 
-            TestManagementClient manage = new TestManagementClient();
-            int aId = manage.createAnswer(answerText.Text);
+            //TestManagementClient manage = new TestManagementClient();
+            //int aId = manage.createAnswer(answerText.Text);
 
-            manage.addAnswerToQuestion(aId, qId);
+            //manage.addAnswerToQuestion(aId, qId);
 
+            InputDialog newAnswer = new InputDialog("Please provide your answer:", "Answer body:", "Example answer.");
+
+            if (newAnswer.ShowDialog() == true)
+            {
+                DisableButtons();
+                AnswersList.AddAnswer(newAnswer.TypedText, EnableButtons);
+            }
         }
 
         private void ARemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
-            int qId = Questions.SelectedQuestion;
-            if (qId == -1) return;
+            DisableButtons();
+            AnswersList.RemoveSelected(EnableButtons);
 
-            int aId = AnswersList.SelectedAnswer;
-            if (aId == -1) return;
+            //int qId = Questions.SelectedQuestion;
+            //if (qId == -1) return;
 
-            TestManagementClient manage = new TestManagementClient();
-            manage.removeAnswerFromQuestion(aId, qId);
+            //int aId = AnswersList.SelectedAnswer;
+            //if (aId == -1) return;
+
+            //TestManagementClient manage = new TestManagementClient();
+            //manage.removeAnswerFromQuestion(aId, qId);
 
         }
 

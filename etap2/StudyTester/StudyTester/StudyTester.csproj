@@ -64,6 +64,9 @@
     <Compile Include="AnswersBox.cs" />
     <Compile Include="CategoryTree.cs" />
     <Compile Include="CategoryTreeItem.cs" />
+    <Compile Include="InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manage.xaml.cs">
       <DependentUpon>Manage.xaml</DependentUpon>
     </Compile>
@@ -79,6 +82,10 @@
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
+    <Page Include="InputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

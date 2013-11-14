@@ -18,6 +18,8 @@ namespace StudyTester
             adder = new BackgroundWorker(),
             deleter = new BackgroundWorker();
 
+        public CallbackAfterRPC functionToCall = null;
+
         public QuestionsList()
             : base()
         {
@@ -28,7 +30,7 @@ namespace StudyTester
             adder.RunWorkerCompleted += adder_RunWorkerCompleted;
 
             deleter.DoWork += deleter_DoWork;
-            deleter.RunWorkerCompleted += deleter_RunWorkerCompleted;
+            deleter.RunWorkerCompleted += adder_RunWorkerCompleted;
         }
 
         public int SelectedQuestion
@@ -47,24 +49,105 @@ namespace StudyTester
             }
         }
 
-        void deleter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         void deleter_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            object[] arg = (object[])e.Argument;
+            int qId = (int)arg[0];
+
+            arg[0] = true;
+            arg[1] = "Success";
+
+            using (TestServiceClient client = new TestServiceClient())
+            using (TestManagementClient manage = new TestManagementClient())
+            {
+                try
+                {
+                    foreach (var a in client.getQuestionAnswers(qId))
+                    {
+                        manage.removeAnswerFromQuestion(a.Key, qId);
+                    }
+
+                    manage.deleteQuestion(qId);
+                }
+                catch (Exception error)
+                {
+                    arg[0] = false;
+                    arg[1] = error.Message;
+                }
+            }
+
+            e.Result = arg;
         }
 
         void adder_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            object[] result = (object[])e.Result;
+
+            if ((bool)result[0])
+            {
+                InitForCategory(categoryId);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show((string)result[1]);
+                if (functionToCall != null)
+                {
+                    functionToCall();
+                    functionToCall = null;
+                }
+            }
         }
 
         void adder_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            object[] arg = (object[])e.Argument;
+            string question = (string)arg[0];
+            string answer = (string)arg[1];
+            int categoryId = (int)arg[2];
+
+            arg[0] = true;
+            arg[1] = "Success";
+
+            using (TestManagementClient manager = new TestManagementClient())
+            {
+                try
+                {
+                    int answerId = manager.createAnswer(answer);
+                    manager.createQuestion(question, categoryId, answerId);
+                }
+                catch (Exception error)
+                {
+                    arg[0] = false;
+                    arg[1] = error.Message;
+                }
+            }
+
+            e.Result = arg;
+        }
+
+        public void AddQuestion(string QBody, string ABody, CallbackAfterRPC completionRoutine)
+        {
+            functionToCall = completionRoutine;
+            object[] arg = { QBody, ABody, categoryId };
+            adder.RunWorkerAsync(arg);
+        }
+
+        public void RemoveSelectedQuestion(CallbackAfterRPC completionRoutine)
+        {
+            functionToCall = completionRoutine;
+            if (SelectedQuestion != -1)
+            {
+                object[] arg = { SelectedQuestion, null };
+                deleter.RunWorkerAsync(arg);
+            }
+            else
+            {
+                if (functionToCall != null)
+                {
+                    functionToCall();
+                    functionToCall = null;
+                }
+            }
         }
 
         void loader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -90,6 +173,14 @@ namespace StudyTester
             {
                 System.Windows.MessageBox.Show((string)result[1]);
             }
+
+            if (functionToCall != null)
+            {
+                functionToCall();
+                functionToCall = null;
+            }
+
+            IsEnabled = true;
         }
 
         void loader_DoWork(object sender, DoWorkEventArgs e)
@@ -115,6 +206,7 @@ namespace StudyTester
         public void InitForCategory(int NewcategoryId)
         {
             categoryId = NewcategoryId;
+            IsEnabled = false;
             Items.Clear();
             Items.Add("Loading...");
             loader.RunWorkerAsync(categoryId);
