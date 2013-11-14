@@ -146,6 +146,7 @@ namespace StudyTester
                     int answer = manage.createAnswer(dialog.answerText.Text);
                     manage.createQuestion(dialog.questionText.Text, Categories.SelectedCategoryId, answer);
                 }
+                Questions.InitForCategory(Categories.SelectedCategoryId);
             }
         }
 
@@ -163,6 +164,8 @@ namespace StudyTester
             }
             
             manage.deleteQuestion(qId);
+
+            Questions.InitForCategory(Categories.SelectedCategoryId);
         }
 
         private void AAddButton_Click_1(object sender, RoutedEventArgs e)
@@ -174,7 +177,7 @@ namespace StudyTester
             int aId = manage.createAnswer(answerText.Text);
 
             manage.addAnswerToQuestion(aId, qId);
-
+            AnswersList.InitForQuestion(Questions.SelectedQuestion);
         }
 
         private void ARemoveButton_Click_1(object sender, RoutedEventArgs e)
@@ -187,7 +190,7 @@ namespace StudyTester
 
             TestManagementClient manage = new TestManagementClient();
             manage.removeAnswerFromQuestion(aId, qId);
-
+            AnswersList.InitForQuestion(Questions.SelectedQuestion);
         }
 
         
