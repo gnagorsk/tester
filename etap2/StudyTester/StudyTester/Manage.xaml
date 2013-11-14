@@ -2,14 +2,29 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:StudyTester" x:Class="StudyTester.Manage"
-        Title="Manage" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}">
+        Title="Manage" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}" Width="500">
     <Grid>
-        <Grid>
-            <local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231" SelectedItemChanged="CategoryTree_SelectedItemChanged_1"/>
-            <Label Name="SelectedCat" Content="Label" HorizontalAlignment="Left" Margin="329,285,0,0" VerticalAlignment="Top"/>
-            <Button Name="QuestionsButton" Content="Manage Questions" HorizontalAlignment="Left" Margin="303,142,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}"/>
+        <Grid Name="CatGrid" Width="500" Margin="0,0,0,0" HorizontalAlignment="Left">
+            <local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231"/>
+            <Button Name="QuestionsButton" Content="Manage Questions" HorizontalAlignment="Left" Margin="303,142,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="QuestionsButton_Click"/>
             <Button Name="AddButton"  Content="Add category" HorizontalAlignment="Left" Margin="303,39,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="Button_Click_1"/>
             <Button Name="RemoveButton" Content="Delete category" HorizontalAlignment="Left" Margin="303,90,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="RemoveButton_Click"/>
+            <Button Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="303,192,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="ExitButton_Click"/>
         </Grid>
+        <Grid Name="QuestGrid" Width="500" Margin="500,0,0,0" HorizontalAlignment="Left">
+            <!--local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231" SelectedItemChanged="CategoryTree_SelectedItemChanged_1"/-->
+            <Button Name="AnswersButton" Content="Manage Answers" HorizontalAlignment="Left" Margin="303,142,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="AnswersButton_Click"/>
+            <Button Name="QAddButton"  Content="Add question" HorizontalAlignment="Left" Margin="303,39,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="QAddButton_Click_1"/>
+            <Button Name="QRemoveButton" Content="Delete question" HorizontalAlignment="Left" Margin="303,90,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="QRemoveButton_Click_1"/>
+            <Button Name="BackToCategoryButton" Content="Back" HorizontalAlignment="Left" Margin="303,192,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="BackToCategoryButton_Click"/>
+        </Grid>
+        <Grid Name="AnsGrid" Width="500" Margin="1000,0,0,0" HorizontalAlignment="Left">
+            <!--local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231" SelectedItemChanged="CategoryTree_SelectedItemChanged_1"/-->
+            <Button Name="MarkerButton" Content="Mark as right" HorizontalAlignment="Left" Margin="303,142,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="MarkerButton_Click"/>
+            <Button Name="AAddButton"  Content="Add answer" HorizontalAlignment="Left" Margin="303,39,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="AAddButton_Click_1"/>
+            <Button Name="ARemoveButton" Content="Delete answer" HorizontalAlignment="Left" Margin="303,90,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="ARemoveButton_Click_1"/>
+            <Button Name="BackToQuestionsButton" Content="Back" HorizontalAlignment="Left" Margin="303,192,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="BackToQuestionsButton_Click"/>
+        </Grid>
+        
     </Grid>
 </Window>

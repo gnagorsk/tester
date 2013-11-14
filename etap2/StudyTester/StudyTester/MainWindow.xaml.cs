@@ -41,10 +41,6 @@ namespace StudyTester
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-            if (worker.IsBusy)
-            {
-                MessageBox.Show("LOL!");
-            }
             worker.RunWorkerAsync(clicked);
         }
 

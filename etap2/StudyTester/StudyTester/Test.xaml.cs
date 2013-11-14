@@ -105,7 +105,7 @@ namespace StudyTester
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            selectedCategory = catTree.GetSelectedCategoryId();
+            selectedCategory = catTree.SelectedCategoryId;
 
             if (selectedCategory == -1) return;
 
