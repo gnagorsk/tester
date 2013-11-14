@@ -24,6 +24,15 @@ namespace StudyTester
             }
         }
 
+        public void Refresh()
+        {
+            if (!loader.IsBusy)
+            {
+                Items.Add("Loading...");
+                loader.RunWorkerAsync((object)CategoryId);
+            }
+        }
+
         public CategoryTreeItem(int id=-1, string header="Availible categories:")
             : base()
         {
@@ -36,8 +45,6 @@ namespace StudyTester
             loader.RunWorkerCompleted += loader_RunWorkerCompleted;
 
             Expanded += CategoryTreeItem_Expanded;
-
-            //this.ExpandSubtree();
         }
 
         void loader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -82,8 +89,11 @@ namespace StudyTester
         {
             if (!ItemsLoaded)
             {
-                loader.RunWorkerAsync((object)CategoryId);
-                ItemsLoaded = true;
+                if (!loader.IsBusy)
+                {
+                    loader.RunWorkerAsync((object)CategoryId);
+                    ItemsLoaded = true;
+                }
             }
         }
     

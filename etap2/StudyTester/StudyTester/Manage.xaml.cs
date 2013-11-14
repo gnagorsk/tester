@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,23 @@ namespace StudyTester
 
         private void CategoryTree_SelectedItemChanged_1(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            SelectedCat.Content = Categories.GetSelectedCategoryId();
+            SelectedCat.Content = Categories.SelectedCategoryId;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddButton.IsEnabled = false;
+            Categories.AddSubCategory("TestHardCodedName", EnableButtons);
+        }
+
+        public void EnableButtons()
+        {
+            AddButton.IsEnabled = true;
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Categories.DeleteSelectedCategory(EnableButtons);
         }
     }
 }

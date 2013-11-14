@@ -4,7 +4,12 @@
         xmlns:local="clr-namespace:StudyTester" x:Class="StudyTester.Manage"
         Title="Manage" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}">
     <Grid>
-        <local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231" SelectedItemChanged="CategoryTree_SelectedItemChanged_1"/>
-        <Label Name="SelectedCat" Content="Label" HorizontalAlignment="Left" Margin="333,73,0,0" VerticalAlignment="Top"/>
+        <Grid>
+            <local:CategoryTree x:Name="Categories" HorizontalAlignment="Left" Height="238" Margin="32,39,0,0" VerticalAlignment="Top" Width="231" SelectedItemChanged="CategoryTree_SelectedItemChanged_1"/>
+            <Label Name="SelectedCat" Content="Label" HorizontalAlignment="Left" Margin="329,285,0,0" VerticalAlignment="Top"/>
+            <Button Name="QuestionsButton" Content="Manage Questions" HorizontalAlignment="Left" Margin="303,142,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}"/>
+            <Button Name="AddButton"  Content="Add category" HorizontalAlignment="Left" Margin="303,39,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="Button_Click_1"/>
+            <Button Name="RemoveButton" Content="Delete category" HorizontalAlignment="Left" Margin="303,90,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="RemoveButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

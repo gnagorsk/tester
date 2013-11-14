@@ -41,6 +41,10 @@ namespace StudyTester
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += worker_DoWork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            if (worker.IsBusy)
+            {
+                MessageBox.Show("LOL!");
+            }
             worker.RunWorkerAsync(clicked);
         }
 
@@ -48,7 +52,6 @@ namespace StudyTester
         {
             object[] result = (object[])e.Result;
             Button clicked = (Button)result[2];
-            // Show new page with options / add or browse / relating our tests. If we succeed of course.
 
             if ((bool)result[0] == false)
             {
@@ -59,15 +62,9 @@ namespace StudyTester
             }
             else
             {
-                // It works, init the rest! and go to the next page...
-                
                 clicked.Content = "Connected!";
                 clicked.Click -= Button_Click_1;
                 clicked.IsEnabled = true;
-
-
-                //<DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="2" Duration="0:0:0.5" />    
-                //<DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="2" Duration="0:0:0.5" />
 
                 int DurationMilis = 300;
 
@@ -85,38 +82,6 @@ namespace StudyTester
 
                 StartButton.BeginAnimation(Button.WidthProperty, popButtonX);
                 StartButton.BeginAnimation(Button.HeightProperty, popButtonY);
-
-                
-                //ScaleTransform RectXForm = new ScaleTransform();
-                //StartButton.RenderTransform = RectXForm;
-
-                //Storyboard buttonStory = new Storyboard();
-
-                //buttonStory.Children.Add(popButtonX);
-                //buttonStory.Children.Add(popButtonY);
-
-                //Storyboard.SetTarget(popButtonX, StartButton);
-                //Storyboard.SetTarget(popButtonY, StartButton);
-                //Storyboard.SetTargetProperty(popButtonX, new PropertyPath(StartButton.RenderTransform));
-                //Storyboard.SetTargetProperty(popButtonY, new PropertyPath(StartButton.RenderTransform));
-
-                //buttonStory.Begin();
-                //Execution
-                //RectXForm.BeginAnimation(ScaleTransform.ScaleXProperty, popButtonX);
-                //RectXForm.BeginAnimation(ScaleTransform.ScaleXProperty, popButtonY);
-                //RectXForm.BeginAnimation(ScaleTransform.ScaleYProperty, growImageY);
-
-                
-                //DoubleAnimation buttonPop = new DoubleAnimation();
-
-                //buttonPop.From = 1;
-                //buttonPop.To = 2;
-
-                //buttonPop.Duration = new Duration(TimeSpan.FromMilliseconds(500));
-
-                //StartButton.BeginAnimation(ScaleTransform.ScaleXProperty, buttonPop);
-
-                
             }
         }
 
