@@ -137,27 +137,31 @@ namespace StudyTester
 
         private void MarkerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (AnswersList.SelectedAnswer != -1)
+            {
+                AnswersList.MarkSelectedAsRight();
+            }
         }
 
         private void QAddButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void QRemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void AAddButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            
+            AnswersList.AddAnswer(Microsoft.VisualBasic.Interaction.InputBox("Please provide the answer:", "Answer input", "Your answer."));
         }
 
         private void ARemoveButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            AnswersList.RemoveSelected();
         }
 
         

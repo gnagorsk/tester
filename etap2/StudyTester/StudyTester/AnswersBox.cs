@@ -19,7 +19,8 @@ namespace StudyTester
         BackgroundWorker
             loader = new BackgroundWorker(),
             adder = new BackgroundWorker(),
-            deleter = new BackgroundWorker();
+            deleter = new BackgroundWorker(),
+            marker = new BackgroundWorker();
 
         public AnswersBox()
             : base()
@@ -28,13 +29,55 @@ namespace StudyTester
             loader.RunWorkerCompleted += loader_RunWorkerCompleted;
 
             adder.DoWork += adder_DoWork;
-            adder.RunWorkerCompleted += adder_RunWorkerCompleted;
+            adder.RunWorkerCompleted += marker_RunWorkerCompleted;
 
             deleter.DoWork += deleter_DoWork;
-            deleter.RunWorkerCompleted += deleter_RunWorkerCompleted;
+            deleter.RunWorkerCompleted += marker_RunWorkerCompleted;
+
+            marker.DoWork += marker_DoWork;
+            marker.RunWorkerCompleted += marker_RunWorkerCompleted;
         }
 
-        public int SelectedQuestion
+        void marker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            object[] result = (object[])e.Result;
+
+            if ((bool)result[0])
+            {
+                InitForQuestion(questionId);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show((string)result[1]);
+            }
+        }
+
+        void marker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            object[] arg = (object[])e.Argument;
+            int questionId = (int)arg[0];
+            int answerId = (int)arg[1];
+
+            arg[0] = true;
+            arg[1] = "Success";
+
+            using (TestManagementClient manager = new TestManagementClient())
+            {
+                try
+                {
+                    //manager.markAsCorrect(questionId, answerId);
+                }
+                catch (Exception error)
+                {
+                    arg[0] = false;
+                    arg[1] = error.Message;
+                }
+            }
+
+            e.Result = arg;
+        }
+
+        public int SelectedAnswer
         {
             get
             {
@@ -50,24 +93,81 @@ namespace StudyTester
             }
         }
 
-        void deleter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void MarkSelectedAsRight()
         {
-            throw new NotImplementedException();
+            if (SelectedAnswer != -1)
+            {
+                object[] arg = { questionId, SelectedAnswer };
+                marker.RunWorkerAsync(arg);
+            }
+        }
+
+        public void RemoveSelected()
+        {
+            if (SelectedAnswer != -1)
+            {
+                object[] arg = { questionId, SelectedAnswer };
+                deleter.RunWorkerAsync(arg);
+            }
         }
 
         void deleter_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            object[] arg = (object[])e.Argument;
+            int questionId = (int)arg[0];
+            int answerId = (int)arg[1];
+
+            arg[0] = true;
+            arg[1] = "Success";
+
+            using (TestManagementClient manager = new TestManagementClient())
+            {
+                try
+                {
+                    manager.removeAnswerFromQuestion(answerId, questionId);
+                    //manager.
+                    //manager.markAsCorrect(questionId, answerId);
+                }
+                catch (Exception error)
+                {
+                    arg[0] = false;
+                    arg[1] = error.Message;
+                }
+            }
+
+            e.Result = arg;
         }
 
-        void adder_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void AddAnswer(string body)
         {
-            throw new NotImplementedException();
+            object[] arg = { questionId, body };
+            adder.RunWorkerAsync(arg);
         }
 
         void adder_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            object[] arg = (object[])e.Argument;
+            int questionId = (int)arg[0];
+            string answerBody = (string)arg[1];
+
+            arg[0] = true;
+            arg[1] = "Success";
+
+            using (TestManagementClient manager = new TestManagementClient())
+            {
+                try
+                {
+                    int answerId = manager.createAnswer(answerBody);
+                    manager.addAnswerToQuestion(answerId, questionId);
+                }
+                catch (Exception error)
+                {
+                    arg[0] = false;
+                    arg[1] = error.Message;
+                }
+            }
+
+            e.Result = arg;
         }
 
         void loader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -99,6 +199,8 @@ namespace StudyTester
             {
                 System.Windows.MessageBox.Show((string)result[1]);
             }
+
+            IsEnabled = true;
         }
 
         void loader_DoWork(object sender, DoWorkEventArgs e)
@@ -132,6 +234,7 @@ namespace StudyTester
         public void InitForQuestion(int newQuestionID)
         {
             questionId = newQuestionID;
+            IsEnabled = false;
             Items.Clear();
             Items.Add("Loading...");
             loader.RunWorkerAsync(questionId);
