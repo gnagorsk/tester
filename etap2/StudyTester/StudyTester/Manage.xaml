@@ -25,6 +25,7 @@
             <Button Name="AAddButton"  Content="Add answer" HorizontalAlignment="Left" Margin="303,39,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="AAddButton_Click_1"/>
             <Button Name="ARemoveButton" Content="Delete answer" HorizontalAlignment="Left" Margin="303,90,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="ARemoveButton_Click_1"/>
             <Button Name="BackToQuestionsButton" Content="Back" HorizontalAlignment="Left" Margin="303,192,0,0" VerticalAlignment="Top" Width="161" Style="{DynamicResource OurButton}" Click="BackToQuestionsButton_Click"/>
+            <local:AnswersBox x:Name="AnswersList" HorizontalAlignment="Left" Height="240" Margin="23,39,0,0" VerticalAlignment="Top" Width="241"/>
         </Grid>
         
     </Grid>

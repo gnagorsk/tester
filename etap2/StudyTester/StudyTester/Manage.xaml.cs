@@ -116,9 +116,11 @@ namespace StudyTester
 
         private void AnswersButton_Click(object sender, RoutedEventArgs e)
         {
-            // if question selected
-            MoveRight();
-            // Add some init functions
+            if (Questions.SelectedItem != null)
+            {
+                MoveRight();
+                AnswersList.InitForQuestion(Questions.SelectedQuestion);
+            }
         }
 
         private void BackToCategoryButton_Click(object sender, RoutedEventArgs e)

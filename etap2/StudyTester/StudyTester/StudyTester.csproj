@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnswersBox.cs" />
     <Compile Include="CategoryTree.cs" />
     <Compile Include="CategoryTreeItem.cs" />
     <Compile Include="Manage.xaml.cs">
