@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 10/24/2013 02:16:02
--- Generated from EDMX file: C:\Users\Grzegorz\git\tester\etap1\Tester\Questionnaire\Questions.edmx
+-- Date Created: 11/14/2013 02:18:37
+-- Generated from EDMX file: C:\Users\jajcer\Desktop\repo\tester\etap1\Tester\Questionnaire\Questions.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -123,7 +123,7 @@ ADD CONSTRAINT [FK_QuestionCategory]
     FOREIGN KEY ([Category_id])
     REFERENCES [dbo].[CategorySet]
         ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_QuestionCategory'
 CREATE INDEX [IX_FK_QuestionCategory]
@@ -174,7 +174,7 @@ ADD CONSTRAINT [FK_Subcategory]
     FOREIGN KEY ([Category_id])
     REFERENCES [dbo].[CategorySet]
         ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Subcategory'
 CREATE INDEX [IX_FK_Subcategory]
