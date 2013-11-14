@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -25,7 +27,17 @@ namespace StudyTester
         public Test()
         {
             InitializeComponent();
-           // fillCategories();
+            questions.CollectionChanged += onQuestionChange;
+        }
+
+        int questions_added = 0;
+
+        void onQuestionChange(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                questions_added += e.NewItems.Count;
+            }
         }
 
         private class TestAnswer
@@ -61,7 +73,7 @@ namespace StudyTester
             public List<TestAnswer> answers { get; set; }
         }
 
-        private List<TestQuestion> questions = new List<TestQuestion>();
+        private ObservableCollection<TestQuestion> questions = new ObservableCollection<TestQuestion>();
 
         private int answered_questions { get; set; }
 
@@ -95,7 +107,7 @@ namespace StudyTester
             showNext();
 
             answered_questions = 0;
-            QuestionsLeft.Content = "Questions left: " + answered_questions + "/" + questions.Count;
+            QuestionsLeft.Content = "Questions left: " + answered_questions + "/" + questions_added;
 
             if (questions.Count == 0)
             {
