@@ -20,42 +20,11 @@ namespace StudyTester
     /// </summary>
     public partial class Test : Window
     {
-        private void fillSubcategories(TreeViewItem parent, int id)
-        {
-            using (TestServiceClient ServiceConnection = new TestServiceClient())
-            {
-                Dictionary<int, String> categories = ServiceConnection.getSubcategories(id);
-                foreach (var v in categories)
-                {
-                    TreeViewItem c = new TreeViewItem();
-                    c.Header = v.Value;
-                    c.Tag = v.Key;
-                    fillSubcategories(c, v.Key);
-                    parent.Items.Add(c);
-                }
-            }
-        }
-
-        private void fillCategories()
-        {
-            using (TestServiceClient ServiceConnection = new TestServiceClient())
-            {
-                Dictionary<int, String> categories = ServiceConnection.getCategories();
-                foreach (var v in categories) {
-                    TreeViewItem c = new TreeViewItem();
-                    c.Header = v.Value;
-                    c.Tag = v.Key;
-                    fillSubcategories(c, v.Key);
-                    CategoryTree.Items.Add(c);
-                }
-            }
-
-        }
 
         public Test()
         {
             InitializeComponent();
-            fillCategories();
+           // fillCategories();
         }
 
         private class TestAnswer
@@ -104,10 +73,13 @@ namespace StudyTester
 
             answered_questions = 0;
 
-            TreeViewItem selectedItem = ((TreeViewItem)CategoryTree.SelectedItem);
+            int selectedCategory = catTree.GetSelectedCategoryId();
+
+            if (selectedCategory == -1) return;
+
             using (TestServiceClient ServiceConnection = new TestServiceClient())
             {
-                Dictionary<int, String> squestions = ServiceConnection.getQuestions((int)selectedItem.Tag);
+                Dictionary<int, String> squestions = ServiceConnection.getQuestions(selectedCategory);
                 foreach (var vq in squestions)
                 {
                     TestQuestion q = new TestQuestion(vq.Value, vq.Key);
@@ -134,11 +106,16 @@ namespace StudyTester
 
         public void showNext()
         {
+            SkipQuestion.IsEnabled = false;
             Correctness.Content = "";
             current = checkNext();
 
             if (current != null)
             {
+                if (!current.skipped)
+                {
+                    SkipQuestion.IsEnabled = true;
+                }
                 current.shown = true;
                 QuestionText.Content = current.text;
                 AnswerList.ItemsSource = current.answers;
@@ -162,7 +139,7 @@ namespace StudyTester
             {
                 foreach (TestQuestion q in questions)
                 {
-                    if (q.shown == false && q.skipped == true)
+                    if (q.skipped == true)
                     {
                         next = q;
                         break;
@@ -192,10 +169,12 @@ namespace StudyTester
             }
             else
             {
+                if (AnswerList.SelectedItem == null) return;
                 SkipQuestion.IsEnabled = false;
                 TestAnswer answer = (TestAnswer)AnswerList.SelectedItem;
                 using (TestServiceClient ServiceConnection = new TestServiceClient())
                 {
+                    current.skipped = false;
                     bool correct = ServiceConnection.validateAnswer(current.id, answer.id);
                     if (correct)
                     {

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding"
         xmlns:my1="clr-namespace:Gma.QrCodeNet.Encoding.Windows.WPF;assembly=Gma.QrCodeNet.Encoding"
-        Title="Test" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}" Height="557.176" Width="671.176">
+        xmlns:local="clr-namespace:StudyTester"
+        Title="Test" WindowStartupLocation="CenterScreen" Style="{DynamicResource MainWindowStyle}" Height="557.176" Width="675.654">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="500
                     " Margin="10,10,0,0" VerticalAlignment="Top" Width="640">
@@ -14,7 +15,7 @@
                         <ColumnDefinition Width="36*"/>
                         <ColumnDefinition Width="627*"/>
                     </Grid.ColumnDefinitions>
-                    <TreeView x:Name="CategoryTree" HorizontalAlignment="Left" Height="295" Margin="10,10,0,0" VerticalAlignment="Top" Width="613" Grid.ColumnSpan="3"/>
+                    <local:CategoryTree x:Name="catTree" HorizontalAlignment="Left" Height="295" Margin="10,10,0,0" VerticalAlignment="Top" Width="613" Grid.ColumnSpan="3"/>
                     <Button Content="Go!" HorizontalAlignment="Left" Margin="48.358,374,0,0" VerticalAlignment="Top" Width="358" Height="49" Grid.Column="2" Click="Button_Click_1"/>
                 </Grid>
             </TabItem>
