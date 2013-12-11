@@ -12,11 +12,6 @@ namespace Questionnaire
     public class TestService : ITestService, ITestManagement
     {
         private RemoteProcessingError error = new RemoteProcessingError();
-//ex.Title = "Error Funtion:Add()";
-//ex.ExceptionMessage = "Error occur while doing add function.";
-//ex.InnerException = "Inner exception message from serice";
-//ex.StackTrace = "Stack Trace message from service.";
-//throw new FaultException(ex,"Reason: Testing the Fault contract") ;
 
         public Dictionary<int, String> getCategories()
         {
@@ -41,7 +36,6 @@ namespace Questionnaire
                 error.ExceptionMessage = e.Message;
                 throw new FaultException<RemoteProcessingError>(error);
             }
-            
         }
 
         public Dictionary<int, String> getSubcategories(int category)
